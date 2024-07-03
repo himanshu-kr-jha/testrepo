@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Posts</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4 text-center">Quora Posts</h1>
+        <!-- Loop through posts in descending order -->
+        <% for(let i = posts.length - 1; i >= 0; i--) { %>
+            <div class="post card mb-3">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <i class="material-icons text-primary">person</i> @<%= posts[i].username %>
+                        <% if (posts[i].new) { %>
+                            <span class="badge badge-danger">New</span>
+                        <% } %>
+                    </h3>
+                    <p class="card-text">~<%= posts[i].content %></p>
+                    <!-- View Details Button -->
+                    <a href="/posts/<%= posts[i].id %>" class="btn">
+                        <i class="material-icons" style="color:  skyblue;">visibility</i>
+                    </a>
+                    <!-- Edit Button -->
+                    <a href="/posts/<%= posts[i].id %>/edit" class="btn">
+                        <i class="material-icons">edit</i>
+                    </a>
+                    <!-- Delete Form -->
+                    <form method="post" action="/posts/<%= posts[i].id %>?_method=DELETE" style="display: inline;">
+                        <button type="submit" class="btn">
+                            <i class="material-icons" style="color: red;">delete</i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        <% } %>
+        <!-- Add New Post Button -->
+        <div class="text-center">
+            <a href="/posts/new" class="btn btn-outline-primary btn-lg mt-4">
+                <i class="material-icons">add</i> Add New Post
+            </a>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS Bundle (Popper and Bootstrap JS) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
